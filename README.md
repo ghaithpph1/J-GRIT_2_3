@@ -1,45 +1,44 @@
 # 🛒 J-GRIT Price Tracker & Uptime Monitoring System  
 ### A Web Scraper + Database + Automation + OOP Project
 
-This project automatically tracks product prices from a live website and monitors whether the site is online or offline.  
+This project automatically tracks product prices from a website and monitors whether the site is online or offline.  
 It uses **web scraping**, **SQLite database**, **logging**, **object-oriented programming**, and **automated tests** — satisfying all project requirements.
 
 ---
 
 ## 🚀 Features
 
-### ✅ **1. Automatic Web Scraping**
-The system connects to a local Live Server page and extracts:
-- Product names  
-- Product prices  
-
-HTML elements are selected using `.product`, `<h3>`, and `<p class="price">`.
-
----
-
-### ✅ **2. Price Change Detection**
-Each time the program runs:
-- Prices are compared against the previous run
-- If a price changes → the change is written into:
-  - `price_changes` table in SQLite  
-  - `tracker.log` file  
-- New products are automatically inserted
+### ✅ 1. Automatic Web Scraping
+The system extracts product names and prices using:
+- `.product`
+- `<h3>`
+- `<p class="price">`
 
 ---
 
-### ✅ **3. SQLite Database Storage**
-The database `tracker.db` contains:
+### ✅ 2. Price Change Detection
+Each run:
+- Reads current prices  
+- Compares to previous values  
+- Logs changes to `tracker.log`  
+- Saves history into SQLite in `price_changes`  
+- Inserts new products automatically  
 
-**Table: products**
+---
+
+### ✅ 3. SQLite Database Storage
+Database file: `tracker.db`
+
+**products table**
 | Column | Type |
 |--------|------|
 | name | TEXT (PK) |
 | last_price | TEXT |
 
-**Table: price_changes**
+**price_changes table**
 | Column | Type |
 |--------|------|
-| id | INTEGER (PK) |
+| id | INTEGER PK |
 | product_name | TEXT |
 | old_price | TEXT |
 | new_price | TEXT |
@@ -47,25 +46,46 @@ The database `tracker.db` contains:
 
 ---
 
-### ✅ **4. Uptime Monitoring**
-Checks if the website is:
-- 🟢 ONLINE  
-- 🔴 OFFLINE  
-- ⚠️ Error status code  
+### ✅ 4. Uptime Monitoring
+Checks if the website returns:
+- 200 → ONLINE  
+- Non-200 → ERROR  
+- No response → OFFLINE  
 
-Logs results to `tracker.log`.
-
----
-
-### ✅ **5. Clean OOP Architecture**
-The system follows good object-oriented practices:
-- `Database` class  
-- `PriceTracker` class  
-- `UptimeTracker` class  
-- `Tracker` abstract base class  
-- `Product` & `PriceChange` dataclasses  
+Logged in `tracker.log`.
 
 ---
 
-### ✅ **6. Logging**
-Every price change and error is recorded in:
+### ✅ 5. Clean OOP Architecture
+Includes:
+- `Tracker` (abstract class)
+- `PriceTracker`
+- `UptimeTracker`
+- `Database`
+- `Product` dataclass
+- `PriceChange` dataclass
+
+---
+
+### ✅ 6. Logging
+Everything is recorded in:
+
+Examples:
+- Website ONLINE/OFFLINE  
+- Price changes  
+- New product inserted  
+- Errors  
+
+---
+
+### ✅ 7. Automated Unit Tests
+Inside `tests/`:
+- `test_scraper.py`
+- `test_database.py`
+- `test_uptime.py`
+- `__init__.py`
+
+Run with:
+
+```bash
+python3 -m unittest discover tests
