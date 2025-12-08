@@ -8,7 +8,7 @@ class UptimeTracker(Tracker):
         self.url = url
 
     def run_once(self) -> None:
-          """Check whether the website is online, error, or offline."""
+          
         try:
             response = requests.get(self.url, timeout=3)
             if response.status_code == 200:
