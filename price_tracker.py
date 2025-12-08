@@ -16,7 +16,7 @@ class PriceTracker(Tracker):
 
     def scrape_products(self) -> List[Product]:
        
-        a
+        
         response = requests.get(self.url)
         soup = BeautifulSoup(response.text, "html.parser")
 
