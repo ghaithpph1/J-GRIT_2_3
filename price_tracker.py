@@ -15,7 +15,7 @@ class PriceTracker(Tracker):
         self.url = url
 
     def scrape_products(self) -> List[Product]:
-        """Scrape the webpage and return a list of Product objects."""
+       
         a
         response = requests.get(self.url)
         soup = BeautifulSoup(response.text, "html.parser")
@@ -39,7 +39,7 @@ class PriceTracker(Tracker):
         return products
 
     def run_once(self) -> None:
-        """Perform one full cycle of scraping, comparison, and database updates."""       
+             
         
         products = self.scrape_products()
 
